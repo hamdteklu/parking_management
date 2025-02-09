@@ -1,0 +1,8 @@
+parking-app-backend/
+├── controllers/       # Logic for handling API requests
+├── models/            # Mongoose models (e.g., User, Property, Resident)
+├── routes/            # API routes
+├── .env               # Environment variables
+├── package.json       # Project configuration
+├── server.js          # Main entry point
+└── README.md          # Documentation

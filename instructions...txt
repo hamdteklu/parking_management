@@ -1,0 +1,8 @@
+that is great so far.
+update our current code so that...
+when user logs in and has a role of 'property manager', it can can create a 'property'. 
+if the user is logged in as a property manager, they shall also be able to create a 'property resident'. There should be a mandatory drop down to select a 'property' from before the 'property manager' is able to create a 'property resident'.
+in the register form, if the user selects 'resident' or 'guest' as a role, add a mandatory field as a drop down, and it should have a 'property' name that was pre configured by a any user role 'property manager'. All the 'property's that are created by all the 'property manager's shall be listed as an option in the drop down. If no 'property' is created, don't allow the user to proceed with the registration.
+in terms of data isolation for the above implementations, 
+when 'property manager' X -> creates 'property resident' A, 'property resident' B, 'property resident' C, etc..
+'property resident' A should only have access to data associated with 'property resident' A. 'property resident' A should not have access to 'property resident' B, C, etc.. data. Of course, the 'property manager' user X will also have access to all the data relevant to 'property resident's that are associated with any 'property' that the 'property manager' X created. 'property manager' Y shall not have any access to what 'property manager' X has created/configured.

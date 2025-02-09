@@ -1,0 +1,6 @@
+start_project_here:
+
+//
+C:\Users\16823\Desktop\parking_management\parking-app-frontend> npm start
+
+frontend will run on http://localhost:3000

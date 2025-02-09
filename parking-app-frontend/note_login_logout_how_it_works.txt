@@ -1,0 +1,23 @@
+note_login_logout_how_it_works
+
+How It All Works Together  
+
+    Frontend Sends Requests : 
+        The frontend uses the centralized api.js file to send requests to the backend (e.g., /api/auth/login, /api/auth/register).
+        These requests include the required payload (e.g., email, password).
+         
+
+    Backend Handles Requests : 
+        The backend receives the request via the defined routes (/api/auth/register, /api/auth/login).
+        The controller functions (register and login) process the request:
+            Validate input data.
+            Interact with the database (e.g., check if a user exists, create a new user).
+            Generate and return a JWT token upon success.
+             
+         
+
+    Frontend Receives Response : 
+        If the request is successful, the frontend saves the JWT token in localStorage and redirects the user (e.g., to the dashboard).
+        If the request fails, the frontend displays an error message.
+         
+     

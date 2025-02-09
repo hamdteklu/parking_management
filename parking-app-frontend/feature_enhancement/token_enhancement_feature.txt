@@ -1,0 +1,108 @@
+        
+Token_Enhancements  
+
+Now that your API logic is centralized in utils/api.js, you can make further improvements if needed: 
+1. Add Token Management  
+
+To simplify authentication, you can add a function to set the JWT token globally in Axios headers. This ensures that all API requests automatically include the token when the user is logged in. 
+
+Update utils/api.js with the following: 
+javascript
+ 
+ 
+// Function to set the JWT token in the request headers
+export const setAuthToken = (token) => {
+  if (token) {
+    apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  } else {
+    delete apiClient.defaults.headers.common['Authorization'];
+  }
+};
+-----------------------------
+api.js example:
+
+import axios from 'axios';
+
+const API_URL = 'http://localhost:5000/api';
+const apiClient = axios.create({
+  baseURL: API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// Function to set the JWT token in the request headers
+export const setAuthToken = (token) => {
+  if (token) {
+    apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  } else {
+    delete apiClient.defaults.headers.common['Authorization'];
+  }
+};
+
+// Auth APIs
+export const registerUser = async (userData) => {
+  const response = await apiClient.post('/auth/register', userData);
+  return response.data;
+};
+
+export const loginUser = async (credentials) => {
+  const response = await apiClient.post('/auth/login', credentials);
+  return response.data;
+};
+
+// Property APIs
+export const getProperties = async () => {
+  const response = await apiClient.get('/properties');
+  return response.data;
+};
+
+-------------------------------
+ 
+
+2. // Use this functions in your LoginPage.js after a successful login/logout: 
+ 
+
+import { setAuthToken } from '../utils/api';
+
+// login
+const handleLogin = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await loginUser({ email, password });
+    localStorage.setItem('token', response.token); // Save JWT token
+    setAuthToken(response.token); // Set token in Axios headers
+    navigate('/dashboard'); // Redirect to dashboard
+  } catch (error) {
+    console.error('Login failed:', error.response?.data?.message || 'An error occurred');
+    alert('Login failed: ' + (error.response?.data?.message || 'Invalid credentials'));
+  }
+};
+ 
+// logout
+const handleLogout = () => {
+  localStorage.removeItem('token');
+  setAuthToken(null); // Clear the token globally
+  navigate('/');
+};
+
+ 
+3. Handle Token Expiry  
+
+If your JWT tokens have an expiration time, you can add logic to refresh the token or log the user out when the token expires. For example: 
+javascript
+ 
+ 
+
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      // Token expired or invalid
+      localStorage.removeItem('token');
+      setAuthToken(null);
+      navigate('/'); // Redirect to login page
+    }
+    return Promise.reject(error);
+  }
+);

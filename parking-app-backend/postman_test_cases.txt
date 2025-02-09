@@ -1,0 +1,19 @@
+postman test cases
+
+EP: POST http://localhost:5000/api/auth/register
+Body:
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "password123",
+  "role": "manager"
+}
+
+//
+EP: POST http://localhost:5000/api/auth/login
+Body:
+
+{
+  "email": "john@example.com",
+  "password": "password123"
+}
