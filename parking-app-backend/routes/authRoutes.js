@@ -3,7 +3,8 @@ import express from 'express';
 import { register, login } from '../controllers/authController.js';
 import authorizeRole from '../middleware/authorizeRole.js';
 import jwt from 'jsonwebtoken';
-import User from '../models/User.js';
+import { User } from '../models/User.js';
+
 const router = express.Router();
 
 // Register route
@@ -11,6 +12,9 @@ router.post('/register', register);
 
 // Login route
 router.post('/login', login);
+
+// Resident login - remove
+//router.post('/resident-login', residentLogin);
 
 // Route to refresh token
 router.post('/refresh-token', async (req, res) => {

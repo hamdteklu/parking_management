@@ -30,8 +30,18 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    vehicles: { 
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'Vehicle' 
+    },
+    parkingSpot: { 
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'ParkingSpot', 
+      default: null 
+    },
   },
   { timestamps: true }
 );
 
-export default mongoose.model('User', UserSchema);
+// Named export for the User model
+export const User = mongoose.model('User', UserSchema);

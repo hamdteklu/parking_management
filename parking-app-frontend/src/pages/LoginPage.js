@@ -12,9 +12,9 @@ function LoginPage() {
    * Sends login credentials to the backend and handles the response.
    */
   const handleLogin = async (e) => {
-    console.error(' LoginPage::handleLogin() :   --- start   --- ');
-
+    console.log('LoginPage::handleLogin(): --- start ---');
     e.preventDefault();
+
     try {
       const response = await loginUser({ email, password }); // Call the centralized API function
       const { accessToken, refreshToken, role, name } = response;
@@ -25,11 +25,11 @@ function LoginPage() {
       localStorage.setItem('role', role);
       localStorage.setItem('name', name);
 
-      console.error(' LoginPage::handleLogin() : name= ', name);
-      console.error(' LoginPage::handleLogin() : role= ', role);
+      console.log('LoginPage::handleLogin(): name=', name);
+      console.log('LoginPage::handleLogin(): role=', role);
 
       // Set the access token globally in Axios headers
-      console.error(' LoginPage::handleLogin() :   call setAuthToken() func.. s');
+      console.log('LoginPage::handleLogin(): call setAuthToken() func...');
       setAuthToken(accessToken);
 
       // Redirect based on role

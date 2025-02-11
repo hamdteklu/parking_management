@@ -9,6 +9,7 @@ import { propertyRoutes } from './routes/propertyRoutes.js';
 import { residentRoutes } from './routes/residentRoutes.js';
 import { createResident } from './controllers/residentController.js';
 import { guestParkingRulesRoute } from './routes/guestParkingRules.js';
+import { residentRequestRoutes } from './routes/residentRequestRoutes.js';
 
 // Load environment variables
 dotenv.config();
@@ -50,6 +51,9 @@ app.post('/api/residents', createResident);
 
 // Use the guest parking rules route
 app.use('/api/guest-parking-rules', guestParkingRulesRoute);
+
+app.use('/api/resident-requests', residentRequestRoutes);
+console.log('Registered /api/resident-requests routes');
 
 // Start the server
 const PORT = process.env.PORT || 5000;

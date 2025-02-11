@@ -92,6 +92,14 @@ export const loginUser = async (credentials) => {
   return response.data; // Ensure this includes both `token` and `role`
 };
 
+export const residentLogin = async (credentials) => {
+  try {
+    const response = await apiClient.post('/api/auth/resident-login', credentials);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 /**
  * Property APIs
  */
@@ -285,6 +293,58 @@ export const configureGuestParkingRules = async (rulesData) => {
     return response.data;
   } catch (error) {
     console.error('Error configuring guest parking rules:', error.message);
+    throw error;
+  }
+};
+
+// Create a resident request
+export const createResidentRequest = async (requestData) => {
+  try {
+    console.log('api::createResidentRequest(): Sending request to /resident-requests/requests');
+    const response = await apiClient.post('/resident-requests/requests', requestData);
+    console.log('api::createResidentRequest(): Response from backend:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('api::createResidentRequest() - Error creating resident request:', error.message);
+    throw error;
+  }
+};
+
+// Fetch pending resident requests
+export const getPendingRequests = async () => {
+  try {
+    console.log('api::getPendingRequests(): Sending request to /resident-requests/requests/pending');
+    const response = await apiClient.get('/resident-requests/requests/pending');
+    console.log('api::getPendingRequests(): Response from backend:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('api::getPendingRequests() - Error fetching pending requests:', error.message);
+    throw error;
+  }
+};
+
+// Accept a resident request
+export const acceptResidentRequest = async (requestId, password) => {
+  try {
+    console.log('api::acceptResidentRequest(): Sending request to /resident-requests/requests/accept');
+    const response = await apiClient.post('/resident-requests/requests/accept', { requestId, password });
+    console.log('api::acceptResidentRequest(): Response from backend:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('api::acceptResidentRequest() - Error accepting request:', error.message);
+    throw error;
+  }
+};
+
+// Decline a resident request
+export const declineResidentRequest = async (requestId) => {
+  try {
+    console.log('api::declineResidentRequest(): Sending request to /resident-requests/requests/decline');
+    const response = await apiClient.post('/resident-requests/requests/decline', { requestId });
+    console.log('api::declineResidentRequest(): Response from backend:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('api::declineResidentRequest() - Error declining request:', error.message);
     throw error;
   }
 };

@@ -54,4 +54,6 @@ const ResidentSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model('Resident', ResidentSchema);
+//export default mongoose.model('Resident', ResidentSchema);
+
+export const Resident = mongoose.model('Resident', ResidentSchema);

@@ -6,6 +6,7 @@ dotenv.config();
 
 // Middleware to authorize roles
 const authorizeRole = (role) => (req, res, next) => {
+  console.error('authorizeRole::authorizeRole() :    ---   enter   ---');
   console.error('authorizeRole::authorizeRole()  req.path= ', req.path);
 
   // Allow unauthenticated access for specific routes
@@ -31,6 +32,8 @@ const authorizeRole = (role) => (req, res, next) => {
   } catch (error) {
     res.status(401).json({ message: 'Invalid or expired token' });
   }
+
+  console.error('authorizeRole::authorizeRole() :    ---   exit   ---');
 };
 
 export default authorizeRole;

@@ -1,5 +1,5 @@
 // controllers/residentController.js
-import Resident from '../models/Resident.js';
+import { Resident } from '../models/Resident.js';
 import Property from '../models/Property.js';
 import ParkingSpot from '../models/ParkingSpot.js';
 import jwt from 'jsonwebtoken';
