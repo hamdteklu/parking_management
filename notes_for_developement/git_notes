@@ -1,0 +1,45 @@
+
+// ------------------------------------------------------------------------------------------------------------------------------- //
+
+// Verify the Staged Changes
+C:\parking_management> git status
+
+        modified:   parking-app-frontend/package-lock.json
+        modified:   parking-app-frontend/src/pages/ManagerDashboard.js
+        new file:   parking-app-frontend/src/components/ResidentCard.js
+        new file:   parking-app-frontend/src/components/ResidentTable.js
+        new file:   parking-app-frontend/src/components/ResidentView.js
+        new file:   parking-app-frontend/src/styles/global.css
+
+// Since we have 'new files'/'modified', we need to stage this files:
+PS C:\parking_management> git add parking-app-frontend/package-lock.json
+PS C:\parking_management> git add parking-app-frontend/src/components/ResidentCard.js
+.
+.
+
+// Commit Changes
+PS C:\parking_management\parking-app-frontend> git commit -m "Refactor residents section: Add ResidentView, ResidentTable, and ResidentCard components; Implement card/table toggle functionality"
+
+// Push the Changes
+C:\parking_management\parking-app-frontend> git push origin main
+
+// ------------------------------------------------------------------------------------------------------------------------------- //
+
+
+// git pull
+parking-app-frontend> git pull origin main
+
+// Check Available Branches
+parking-app-frontend> git branch -a
+* master
+  remotes/origin/main
+
+// Reset to the Correct Branch
+parking-app-frontend> git reset --hard origin/main
+
+// Verify the Remote Repository
+git remote -v
+
+// Remove all untracked files
+git clean -fd
+
