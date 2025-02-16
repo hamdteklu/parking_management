@@ -97,26 +97,7 @@ function ManagerDashboard() {
       {/* Header Section */}
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Hello, {userName}</h1>
-        <div className="space-x-4">
-          <button
-            onClick={() => navigate('/add-property')}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-          >
-            Add Property
-          </button>
-          <button
-            onClick={() => navigate('/add-resident')}
-            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-          >
-            Add Resident
-          </button>
-          <button
-            onClick={() => navigate('/guest-parking-config')}
-            className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600"
-          >
-            Guest Parking
-          </button>
-        </div>
+
       </div>
 
       {/* Hero Section (Property Overview) */}
