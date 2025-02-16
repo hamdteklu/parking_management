@@ -8,6 +8,9 @@ import {
   declineResidentRequest,
 } from '../utils/api';
 
+//import ResidentTable from '../components/ResidentTable'; // Import the ResidentTable component
+import ResidentView from '../components/ResidentView'; // Import the new ResidentView component
+
 function ManagerDashboard() {
   const navigate = useNavigate();
   const [properties, setProperties] = useState([]);
@@ -188,53 +191,7 @@ function ManagerDashboard() {
       </div>
 
       {/* Resident Section */}
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold mb-4">Residents</h2>
-        <div className="flex justify-between items-center mb-4">
-          <div className="space-x-4">
-            <button
-              onClick={() => navigate('/add-resident')}
-              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-            >
-              Add Resident
-            </button>
-          </div>
-          <div className="space-x-4">
-            <button className="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400">
-              Cards View
-            </button>
-            <button className="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400">
-              Graph View
-            </button>
-          </div>
-        </div>
-        {residents.length === 0 ? (
-          <p>No residents found.</p>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {residents.map((resident) => {
-              const propertyName = resident.propertyId?.name || 'Unknown Property';
-              const vehicles = resident.vehicles || [];
-              return (
-                <div key={resident._id} className="border p-4 rounded text-center">
-                  <p className="font-semibold">{resident.name}</p>
-                  <p>Property: {propertyName}</p>
-                  <p>Vehicles:</p>
-                  {vehicles.length > 0 ? (
-                    <ul className="list-disc list-inside">
-                      {vehicles.map((vehicle, index) => (
-                        <li key={index}>{`${vehicle.make} - ${vehicle.model}`}</li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p>None</p>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </div>
+      <ResidentView residents={residents} />
     </div>
   );
 }
