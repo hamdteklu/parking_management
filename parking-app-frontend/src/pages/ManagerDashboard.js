@@ -10,6 +10,9 @@ import {
 
 //import ResidentTable from '../components/ResidentTable'; // Import the ResidentTable component
 import ResidentView from '../components/ResidentView'; // Import the new ResidentView component
+import PropertyView from '../components/PropertyView'; // Import the new ResidentView component
+
+import '../styles/global.css'; // Import global styles
 
 function ManagerDashboard() {
   const navigate = useNavigate();
@@ -117,36 +120,7 @@ function ManagerDashboard() {
       </div>
 
       {/* Hero Section (Property Overview) */}
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold mb-4">Properties</h2>
-        {properties.length === 0 ? (
-          <div className="text-center">
-            <p>You haven't added any properties yet.</p>
-            <button
-              onClick={() => navigate('/add-property')}
-              className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-            >
-              Add Property
-            </button>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {properties.map((property) => (
-              <div key={property._id} className="border p-4 rounded text-center">
-                <img src="/property-icon.png" alt="Property Icon" className="mx-auto w-16 h-16" />
-                <p className="font-semibold">{property.name}</p>
-                <p>{property.address}</p>
-              </div>
-            ))}
-            <button
-              onClick={() => navigate('/add-property')}
-              className="col-span-1 md:col-span-3 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-            >
-              Add Another Property
-            </button>
-          </div>
-        )}
-      </div>
+      <PropertyView properties={properties} />
 
       {/* Pending Resident Requests Section */}
       <div className="mb-6">
