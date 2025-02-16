@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ResidentTable from './ResidentTable'; // Table view
 import ResidentCard from './ResidentCard'; // Card view
 import '../styles/global.css'; // Import global styles
 
 function ResidentView({ residents }) {
+  // Initialize state from local storage or default to Card View
+  const [isCardView, setIsCardView] = useState(
+    JSON.parse(localStorage.getItem('isCardView')) ?? true
+  );
+
+  // Save the current view preference to local storage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('isCardView', JSON.stringify(isCardView));
+  }, [isCardView]);
+
   const [searchTerm, setSearchTerm] = useState('');
-  const [isCardView, setIsCardView] = useState(true); // State to toggle between table and card views
 
   // Filter residents based on search term
   const filteredResidents = residents.filter((resident) =>
