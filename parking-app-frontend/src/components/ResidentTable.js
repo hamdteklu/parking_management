@@ -18,6 +18,16 @@ function ResidentTable({ residents }) {
           {residents.map((resident) => {
             const propertyName = resident.propertyId?.name || 'Unknown Property';
             const vehicles = resident.vehicles || [];
+
+            // Default status to "Active" for now
+            const statusClass = 'status-active'; // Later, this will come from the backend
+
+            // TODO: in the future, use the actual value from the DB
+            /*const statusClass = resident.isActive ? 'status-active' : 'status-inactive';
+            <p className={`status-indicator ${statusClass}`}>
+              {resident.isActive ? 'Active' : 'Inactive'}
+            </p>*/
+
             return (
               <tr key={resident._id}>
                 <td>{resident.name}</td>
@@ -31,8 +41,9 @@ function ResidentTable({ residents }) {
                     <span>None</span>
                   )}
                 </td>
-                <td className={`status ${resident.isActive ? 'occupied' : 'vacant'}`}>
-                  {resident.isActive ? 'Active' : 'Inactive'}
+                {/* Status Indicator */}
+                <td>
+                  <p className={`status-indicator ${statusClass}`}>Active</p>
                 </td>
                 <td>
                   <button className="view-btn">View</button>
