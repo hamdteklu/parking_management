@@ -18,10 +18,32 @@ dotenv.config();
 const app = express();
 
 // back-end-port=5000; added this block of code to accept request from different orgin (front-end-port=3000)
+/*
 app.use(cors({
   origin: 'http://localhost:3000', // Allow requests from the frontend
   credentials: true, // Enable cookies or authentication headers if needed
 }));
+*/
+
+// The below two blocks of code were added to replace the above two block of code.
+// This is because I want to access the app on other devices within my local network
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://192.168.4.46:3000', // Add this line for testing with other devices on my local network.
+];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin) || !origin) { // Allow requests without an origin (e.g., Postman)
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true, // Required for cookies or tokens
+};
+
+app.use(cors(corsOptions));
 
 // Middleware to parse JSON
 app.use(express.json());

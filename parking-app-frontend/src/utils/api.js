@@ -2,11 +2,27 @@
 import axios from 'axios';
 
 // Base URL for the backend API
+/*
 const API_URL = 'http://localhost:5000/api'; // Replace with your backend URL if different
 
 // Create an Axios instance with the base URL
 const apiClient = axios.create({
   baseURL: API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+*/
+
+// The below block of code was added to replace the above block of code.
+// Base URL for the backend API
+// Replace with your backend IP address;
+// I added this IP(My network), so I can access the the backend of the app on different divices on my local(wifi) network.
+const BASE_URL = 'http://192.168.4.46:5000/api';
+
+// Create an Axios instance with the base URL
+const apiClient = axios.create({
+  baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
